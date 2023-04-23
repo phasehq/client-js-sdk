@@ -84,35 +84,40 @@ export default class Phase {
       throw new Error("Invalid Phase appID");
     }
     this.appPubKey = appId.split(":")[2];
-    
   }
 
   encrypt = async (
     plaintext: string,
     tag: string = ""
-  ): Promise<PhaseCiphertext | undefined> => {
+  ): Promise<PhaseCiphertext> => {
     await _sodium.ready;
     const sodium = _sodium;
 
-    try {
-      const oneTimeKeyPair = await randomKeyPair();
-      const symmetricKeys = await sessionKeys(
-        oneTimeKeyPair,
-        sodium.from_hex(this.appPubKey)
-      );
-      const ciphertext = await encryptString(plaintext, symmetricKeys.sharedTx);
+    return new Promise<PhaseCiphertext>(async (resolve, reject) => {
+      try {
+        const oneTimeKeyPair = await randomKeyPair();
+        const symmetricKeys = await sessionKeys(
+          oneTimeKeyPair,
+          sodium.from_hex(this.appPubKey)
+        );
+        const ciphertext = await encryptString(
+          plaintext,
+          symmetricKeys.sharedTx
+        );
 
-      // Use sodium.memzero to wipe the keys from memory
-      sodium.memzero(oneTimeKeyPair.privateKey);
-      sodium.memzero(symmetricKeys.sharedTx);
-      sodium.memzero(symmetricKeys.sharedRx);
+        // Use sodium.memzero to wipe the keys from memory
+        sodium.memzero(oneTimeKeyPair.privateKey);
+        sodium.memzero(symmetricKeys.sharedTx);
+        sodium.memzero(symmetricKeys.sharedRx);
 
-      return `ph:${PH_VERSION}:${sodium.to_hex(
-        oneTimeKeyPair.publicKey
-      )}:${ciphertext}:${tag}`;
-    } catch (error) {
-      console.log(`Something went wrong: ${error}`);
-      return undefined;
-    }
+        resolve(
+          `ph:${PH_VERSION}:${sodium.to_hex(
+            oneTimeKeyPair.publicKey
+          )}:${ciphertext}:${tag}`
+        );
+      } catch (error) {
+        reject(`Something went wrong: ${error}`);
+      }
+    });
   };
 }
