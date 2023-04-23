@@ -53,8 +53,7 @@
     "ignore": [
       "!dist/",
       "src/",
-      "test/",
-      "example/"
+      "test/"
     ]
   },
   "jest": {
