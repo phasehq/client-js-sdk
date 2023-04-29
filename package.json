@@ -1,6 +1,6 @@
 {
   "name": "@phase.dev/phase-js",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "JS/TS Client SDK for Phase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "prepare": "npm run build",
     "build": "yarn rollup -c",
     "prepack": "npmignore --auto",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -53,13 +53,6 @@
       "!dist/",
       "src/",
       "test/"
-    ]
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testMatch": [
-      "**/tests/**/*.ts"
     ]
   }
 }

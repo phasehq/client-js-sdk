@@ -1,6 +1,4 @@
-import Phase from "../index";
-
-type PhaseAppId = `phApp:${string}`;
+import Phase from "../src/index";
 
 const SAMPLE_APP_ID =
   "phApp:v1:cd2d579490fd794f1640590220de86a3676fa7979d419056bc631741b320b701";
@@ -14,10 +12,12 @@ describe("Phase", () => {
     expect(phase.appPubKey).toBe(SAMPLE_APP_ID.split(":")[2]);
   });
 
-
   test("Check if constructor throws an error for an invalid Phase AppID", () => {
-    const invalidAppId = "phApp:version:cd2d579490fd794f1640590220de86a3676fa7979d419056bc631741b320b701";
-    expect(() => new Phase(invalidAppId as any)).toThrowError("Invalid Phase appID");
+    const invalidAppId =
+      "phApp:version:cd2d579490fd794f1640590220de86a3676fa7979d419056bc631741b320b701";
+    expect(() => new Phase(invalidAppId as any)).toThrowError(
+      "Invalid Phase appID"
+    );
   });
 
   test("Check if Phase encrypt returns a valid ph:*", async () => {
