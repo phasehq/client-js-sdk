@@ -1,4 +1,5 @@
 # Javscript Client SDK for Phase
+
 Phase SDK to encrypt data in client-side JavaScript applications
 
 ## Install
@@ -8,7 +9,7 @@ Phase SDK to encrypt data in client-side JavaScript applications
 ## Import
 
 ```js
-import Phase from '@phase.dev/phase-js'
+import Phase from "@phase.dev/phase-js";
 ```
 
 ## Initialize
@@ -16,10 +17,25 @@ import Phase from '@phase.dev/phase-js'
 Initialize the SDK with your `APP_ID`:
 
 ```js
-const phase = new Phase(`${APP_ID}`)
+const phase = new Phase(APP_ID);
 ```
-## Usage 
+
+## Usage
 
 ```js
-const ciphertext = await phase.encrypt('hello world')
+const ciphertext = await phase.encrypt("hello world");
 ```
+
+## Development
+
+### Install dependencies
+
+`npm install`
+
+### Build
+
+`npm run build`
+
+### Run tests
+
+`npm test`
