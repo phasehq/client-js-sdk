@@ -1,9 +1,9 @@
 {
   "name": "@phase.dev/phase-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JS/TS Client SDK for Phase",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "repository": "https://github.com/phasehq/client-js-sdk",
   "author": "phasehq",
   "license": "MIT",
