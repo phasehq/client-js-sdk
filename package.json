@@ -1,6 +1,6 @@
 {
   "name": "@phase.dev/phase-js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "JS/TS Client SDK for Phase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
